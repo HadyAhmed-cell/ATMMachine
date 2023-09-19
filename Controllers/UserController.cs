@@ -45,6 +45,11 @@ namespace ATMMachine.Controllers
         {
             var user = await _context.Users.Where(x => x.Id == id).SingleOrDefaultAsync();
 
+            if ( user == null )
+            {
+                return NotFound("User Not Found");
+            }
+
             return Ok(user.AccountBalance);
         }
 
@@ -56,6 +61,11 @@ namespace ATMMachine.Controllers
                 return BadRequest("CashWithdrawl Can't Exceed 1000 L.E Per Transaction");
             }
             var user = await _context.Users.Where(x => x.Id == id).SingleOrDefaultAsync();
+
+            if ( user == null )
+            {
+                return NotFound("User Not Found");
+            }
 
             user.AccountBalance -= amount;
 
