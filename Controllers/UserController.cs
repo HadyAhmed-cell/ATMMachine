@@ -66,6 +66,10 @@ namespace ATMMachine.Controllers
             {
                 return NotFound("User Not Found");
             }
+            if ( user.AccountBalance < amount )
+            {
+                return BadRequest("Insufficient Funds !");
+            }
 
             user.AccountBalance -= amount;
 
